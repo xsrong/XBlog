@@ -1,0 +1,9 @@
+<div class="node-list sub-navbar">
+  <div class="container">
+  <% nodes.each do |node| %>
+    <div style="display:inline; margin: 20px;">
+      <%= link_to(node.name, node, class: "node-list-element") %>
+    </div>
+  <% end %>
+  </div>
+</div>

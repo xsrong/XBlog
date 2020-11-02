@@ -1,0 +1,31 @@
+<% provide(:title, @post.title) %>
+
+<div>
+  <div class="container col-lg-9">
+    <div class="post-detail">
+      <div class="post-info">
+        <%= link_to(@post.node.name, @post.node)%> | 
+        <span><%= @post.title %></span>
+        <div class="post-timestamp">
+          <%= link_to(@author.nickname, @author) %>
+          <span><%= display_newest_timestamp(@post) %></span>
+        </div>
+      </div>
+      
+      <div class="post-content">
+        <h3><%= @post.content %></h3>
+      </div>
+
+      <% if current_user_has_ud_permission_to?(@author) %>
+        <div class="action-buttons">
+          <%= button_to("Edit", edit_post_path(@post), method: :get, class: "btn btn-primary") %>
+          <%= button_to("Destroy", @post, method: :delete, class: "btn btn-danger") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container user-detail col-lg-3">
+    <%= link_to(@author.nickname, @author) %>
+  </div>
+</div>

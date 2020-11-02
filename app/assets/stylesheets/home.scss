@@ -1,0 +1,57 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#home-main {
+  // border-spacing: 6px;
+}
+
+.node-list {
+  background: white;
+  margin-left: -15px;
+  margin-right: 35px;
+  margin-bottom: 15px;
+}
+
+.node-list-element:hover {
+  background: aliceblue;
+}
+
+#home-node {
+  background: white;
+  border-right: 50px solid hsla(0,0%,89.8%,.4);
+  border-bottom: 50px solid hsla(0,0%,89.8%,.4);
+  // float: none;
+}
+
+#home-node-name{
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.home-post {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.home-post:hover {
+  background: aliceblue;
+}
+
+.post-list-title {
+  margin-right: 50px;
+  font-size: 18px;
+}
+
+.timestamp-md {
+  border-bottom: 1px solid hsla(0,0%,89.8%,.4);
+}
+
+.new-post-tag {
+  font-size: 10px;
+  color: blue;
+  float: right;
+}

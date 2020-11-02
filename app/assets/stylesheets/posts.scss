@@ -1,0 +1,37 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.post-detail {
+  background: white;
+}
+
+.post-info {
+  font-size: 22px;
+  padding: 25px 25px 0px;
+  line-height: 110%;
+}
+
+.post-content {
+  padding: 25px 25px 25px;
+}
+
+.post-timestamp {
+  margin-top: 5px;
+  font-size: 13px;
+  color: gray;
+}
+
+.action-buttons {
+  padding: 25px 25px 0px;
+  display: flex;
+}
+
+.button_to {
+  margin: 5px;
+  margin-left: 0px;
+}
+
+.user-detail {
+  background: white;
+}

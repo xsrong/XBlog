@@ -1,0 +1,25 @@
+<% provide(:title, @node.name) %>
+
+<p id="notice"><%= notice %></p>
+
+<h1><%= @node.name %></h1>
+<% @posts.each do |post| %>
+  <div>
+    <li>
+      <div>
+        <%= link_to(post.title, post) %>
+      </div>
+      <div>
+        <%= link_to(post.user.nickname, post.user) %>
+      </div>
+      <div>
+        <%= display_limited_content(post, 50) %>
+      </div>
+    </li>
+    <br />
+  </div>
+<% end %>
+
+<% if @posts.size.zero? %>
+  no content here...<%= link_to("post one!", new_post_path) %>
+<% end %>

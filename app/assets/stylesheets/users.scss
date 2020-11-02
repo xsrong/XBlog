@@ -1,0 +1,50 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.user-detail {
+  background: white;
+  padding-bottom: 40px;
+}
+
+.user-info-menu {
+  margin: 15px;
+  font-size: 20px;
+  padding-bottom: 15px;
+}
+
+.user-nickname {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.user-email, .user-created-at, .user-signature {
+  color: gray;
+  margin: 5px;
+}
+
+.user-signature {
+  padding-bottom: 15px;
+  border-bottom: 2px solid hsla(0,0%,89.8%,.4);
+}
+
+.user-selected-info {
+  background: white;
+  margin: 15px;
+}
+
+.user-info-datas {
+  margin: 15px;
+  // padding-top: 20px;
+}
+
+.no-data-tag {
+  background: rgba(229, 229, 229, 0.4);
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+}

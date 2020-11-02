@@ -1,0 +1,24 @@
+<% unless datas.size.zero? %>
+<div class="data-detail" id="data-detail">
+<% datas.each do |data| %>
+  <div class="home-post" onclick="javascrtpt:window.location.href='<%= '/' + data.class.to_s.underscore + 's/' + data.id.to_s %>';">
+    <div class="post-list-title">
+      <%= link_to(data.title, data) %>
+      <% if new_post?(data) %>
+        <div class="new-post-tag">new</div>
+      <% end %>
+    </div>
+    <div style="margin: 15px 40px 15px 0px;">
+      <%= display_limited_content(data, 100) %>
+    </div>
+  </div>
+  <div class="timestamp-md">
+    <%= link_to(user.nickname, user, id: "home-post-author") %>
+    <span><%= display_newest_timestamp(data) %></span>
+  </div>
+  <br />
+<% end %>
+</div>
+<% else %>
+  <div class="no-data-tag">No data</div>
+<% end %>

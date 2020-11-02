@@ -1,0 +1,55 @@
+<% provide(:title, "Home") %>
+
+<div id="home-main" class="container">
+
+
+
+  <div class="dropdown" style="margin-left: -15px;">
+    <a href="#", data-toggle="dropdown", class="btn btn-primary dropdown-toggle" style="margin-bottom: 15px; color: white;">
+      Select Nodes
+    </a>
+    <ul class="dropdown-menu">
+      <%= render 'layouts/node_list', { nodes: @nodes } %>
+    </ul>
+  </div>
+
+  
+
+
+
+
+
+  <div class="row row-cols-2">
+   <% @posts.each_with_index do |node_posts, i| %>
+    <section class="col-md-6" id="home-node">
+      <div id="home-node-name"><%= link_to(@nodes[i].name, @nodes[i]) %></div>
+      <% node_posts.each do |post| %>
+        <div class="home-post" onclick="javascrtpt:window.location.href='posts/<%= post.id %>';">
+          <div class="post-list-title">
+            <%= link_to(post.title, post) %>
+            <% if new_post?(post) %>
+              <div class="new-post-tag">new</div>
+            <% end %>
+          </div>
+          <div style="margin: 15px 0px 15px 0px;">
+            <%= display_limited_content(post, 100) %>
+          </div>
+        </div>
+        <div class="timestamp-md">
+          <%= link_to(post.user.nickname, post.user, id: "home-post-author") %>
+          <span><%= display_newest_timestamp(post) %></span>
+        </div>
+        <br />
+      <% end %>
+
+      <% unless node_posts.size.zero?  %>
+        <div id="home-see-more">
+          <p><%= link_to("See More...", node_path(@nodes[i])) %></p>
+        <div>
+      <% else%>
+        <%= "no content here..." + "　" * 8 %>
+      <% end %>
+    </section>
+  <% end %>
+  </div>
+</div>
