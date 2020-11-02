@@ -3,8 +3,11 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
-  resources :posts
+  resources :posts do
+    resources :comments, only: [:create]
+  end
   resources :nodes, only: [:new, :show]
+  # resources :comments, only: [:create, :destroy]
   
   get "users/:id", to: "users#info", as: :user
   get "users/:id/comments", to: "users#comments_list", as: :user_comments

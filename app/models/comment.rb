@@ -1,7 +1,7 @@
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :post
-  validates :comment, presence: true
+  validates :content, presence: true
 
   def title
     self.post.title

@@ -29,7 +29,7 @@ class NodesController < ApplicationController
 
     def check_permission
       unless admin?(current_user)
-        redirect_to root_path, notice: "invalid action!!"
+        redirect_to root_path, alert: "invalid action!!"
       end
     end
 end

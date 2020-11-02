@@ -13,7 +13,9 @@
     <%= render 'layouts/quick_index' %>
     <div class="container" style="min-height:800px;">
       <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <% unless alert.blank? %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
       <%= yield %>
     </div>
     <%= render 'layouts/footer' %>

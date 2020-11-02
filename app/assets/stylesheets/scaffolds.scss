@@ -52,13 +52,25 @@ a:visited {
 // div.actions {
 //   margin-bottom: 10px; }
 
-// #notice {
-//   color: green; }
+.notice, .alert {
+  margin-top: 45px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
 
-// .field_with_errors {
-//   padding: 2px;
-//   background-color: red;
-//   display: table; }
+.notice {
+  background-color: green;
+}
+
+.alert {
+  background-color: red; 
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table; }
 
 // #error_explanation {
 //   width: 450px;

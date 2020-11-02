@@ -1,9 +1,9 @@
 <% unless datas.size.zero? %>
 <div class="data-detail" id="data-detail">
 <% datas.each do |data| %>
-  <div class="home-post" onclick="javascrtpt:window.location.href='<%= '/' + data.class.to_s.underscore + 's/' + data.id.to_s %>';">
+  <div class="home-post" onclick="javascrtpt:window.location.href='<%= '/posts/' + data.post_id.to_s %>';">
     <div class="post-list-title">
-      <%= link_to(data.title, data) %>
+      <%= link_to(data.title, data.post) %>
       <% if new_post?(data) %>
         <div class="new-post-tag">new</div>
       <% end %>

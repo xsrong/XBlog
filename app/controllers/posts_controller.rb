@@ -21,6 +21,7 @@ class PostsController < ApplicationController
   def show
     @author = User.find(@post.user_id)
     @node = Node.find(@post.node_id)
+    @comments = @post.comments
   end
 
   def edit
@@ -52,7 +53,7 @@ class PostsController < ApplicationController
     def check_permission
       @user = @post.user
       unless current_user_has_ud_permission_to?(@user)
-        redirect_to root_path, notice: "invalid action!"
+        redirect_to root_path, alert: "invalid action!"
       end
     end
 end

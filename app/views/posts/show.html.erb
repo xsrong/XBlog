@@ -13,13 +13,41 @@
       </div>
       
       <div class="post-content">
-        <h3><%= @post.content %></h3>
+        <%= @post.content %>
       </div>
 
       <% if current_user_has_ud_permission_to?(@author) %>
         <div class="action-buttons">
           <%= button_to("Edit", edit_post_path(@post), method: :get, class: "btn btn-primary") %>
           <%= button_to("Destroy", @post, method: :delete, class: "btn btn-danger") %>
+        </div>
+      <% end %>
+
+      <div class="post-comments">
+        <%= render("comments", {comments: @comments}) %>
+      </div>
+    </div>
+
+    <div class="comments-new">
+      <%= form_with(model: comment=Comment.new, url: post_comments_path(@post), remote: true) do |form| %>
+        <% if comment.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(comment.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul>
+              <% comment.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field comment-new-noti">
+          <%= form.label :new_comment %>
+          <%= form.text_area :content, class: "comment-content-input"%>
+        </div>
+
+        <div class="actions comment-submit">
+          <%= form.submit("Commment", class: "btn btn-primary") %>
         </div>
       <% end %>
     </div>

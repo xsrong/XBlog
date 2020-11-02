@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def comments_list
     @comments = @user.comments.order(id: :desc)
     respond_to do |format|
-      format.js { render 'comments' }
+      format.js { render 'users/comments' }
     end
   end
 

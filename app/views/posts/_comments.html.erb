@@ -1,0 +1,8 @@
+<% comments.each_with_index do |comment, i| %>
+  <div class="post-comment">
+    <div class="comment-user"><%= link_to(comment.user.nickname, comment.user) %></div>
+    <span class="comment-i">#<%= i+1 %></span>
+    <div class="comment-timestamp"> | <%= display_newest_timestamp(comment) %></div>
+    <div class="comment-content"><%= comment.content %></div>
+  </div>
+<% end %>
