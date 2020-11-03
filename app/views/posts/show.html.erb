@@ -13,7 +13,7 @@
       </div>
       
       <div class="post-content">
-        <%= @post.content %>
+        <%= raw markdown(@post.content) %>
       </div>
 
       <% if current_user_has_ud_permission_to?(@author) %>
@@ -24,7 +24,7 @@
       <% end %>
 
       <div class="post-comments">
-        <%= render("comments", {comments: @comments}) %>
+        <%= render("comments", { comments: @comments, post_id: @post.id }) %>
       </div>
     </div>
 
@@ -43,7 +43,22 @@
 
         <div class="field comment-new-noti">
           <%= form.label :new_comment %>
-          <%= form.text_area :content, class: "comment-content-input"%>
+
+          <div class="editor-toolbar clearfix">
+            <div class="toolbar-buttons">
+            <div class="dropdown" id="dropdown-insert-codes">
+              <a href="#" class="dropdown-toggle-split" data-toggle="dropdown">
+                <%= fa_icon "code", style: "font-size:24px; font-weight:bold;" %>
+              </a>
+
+              <ul class="dropdown-menu">
+                <li><%= link_to("Ruby", "#", remote: true, onclick: "insertCode('ruby')") %></li>
+                <li><%= link_to("Java", "#", remote: true, onclick: "insertCode('java')") %></li>
+              </ul>
+            </div>
+            </div>
+          </div>
+          <%= form.text_area :content, autocomplete: "off", class: "comment-content-input", rows: 4, oninput: "textAreaHeightFix(this)" %>
         </div>
 
         <div class="actions comment-submit">
@@ -57,3 +72,21 @@
     <%= link_to(@author.nickname, @author) %>
   </div>
 </div>
+
+<script>
+function insertCode(lang){
+  var obj = $(".comment-content-input");
+  var str = obj.val();
+  obj.val(str + "\n\n```" + lang + "\n\n```");
+  obj.trigger("oninput")
+}
+
+function textAreaHeightFix(obj){
+  var lineCount = obj.value.split(/\r?\n/).length;
+  if (lineCount >= 4) {
+    obj.rows = lineCount + 1
+  } else {
+    obj.rows = 4
+  }
+}
+</script>

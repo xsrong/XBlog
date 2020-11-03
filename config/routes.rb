@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   resources :posts do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :edit, :update]
   end
   resources :nodes, only: [:new, :show]
   # resources :comments, only: [:create, :destroy]

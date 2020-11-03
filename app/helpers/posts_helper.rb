@@ -1,6 +1,11 @@
 module PostsHelper
   def display_limited_content(post, limit=20)
-    post.content.size <= limit ? post.content : post.content[0..limit] + "..."
+    if post.content.size <= limit
+      content = post.content
+    else
+      content = post.content[0..limit] + "..."
+    end
+    html_tag_filter(markdown(content))
   end
 
   def updated?(post)

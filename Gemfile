@@ -32,6 +32,13 @@ gem "devise-encryptable"
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+# Markdown
+gem "redcarpet"
+gem 'coderay'
+gem 'nokogiri'
+
+gem 'font-awesome-rails'
+
 # Permission
 gem "cancancan"
 
