@@ -6,4 +6,8 @@ class Comment < ApplicationRecord
   def title
     self.post.title
   end
+
+  def comments
+    []
+  end
 end

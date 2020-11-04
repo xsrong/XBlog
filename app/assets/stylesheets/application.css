@@ -12,6 +12,7 @@
  *
  *= require bootstrap/dist/css/bootstrap
  *= require font-awesome
+ *= require md_simple_editor
  *= require_tree .
  *= require_self
  */

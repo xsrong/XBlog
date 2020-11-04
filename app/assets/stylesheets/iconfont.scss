@@ -1,0 +1,33 @@
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+.fa {
+  margin: 0px 20px 0px 0px;
+}
+
+.fa:hover {
+  background-color: aliceblue;
+}
+
+.code-chooser {
+  margin: 15px;
+  cursor: pointer;
+}
+
+.code-chooser:hover {
+  background-color: aliceblue;
+}
+
+.editor-tool {
+  cursor: pointer;
+}
+
+.hyperlink-editor {
+  padding: 30px;
+  display: block;
+  position: absolute;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}

@@ -5,7 +5,7 @@
     <div class="comment-timestamp"> | <%= display_newest_timestamp(comment) %></div>
     <% if current_user_has_ud_permission_to?(comment.user) %>
       <div class="comment-action">
-        <%= link_to("Edit", edit_post_comment_path(post_id, comment.id)) %>
+        <%= link_to(fa_icon("edit", title: "Edit", class: "fa-2x", style: "margin-top:-5px;"), edit_post_comment_path(post_id, comment.id)) %>
       </div>
     <% end %>
     <div class="comment-content"><%= raw markdown(comment.content) %></div>

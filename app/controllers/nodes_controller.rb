@@ -2,7 +2,7 @@ class NodesController < ApplicationController
   before_action :set_node, only: [:show]
   before_action :check_permission, only: [:new, :create]
   def show
-    @posts = @node.posts.order(id: :desc)
+    @posts = @node.posts.order(last_comment_id: :desc)
   end
 
   def new

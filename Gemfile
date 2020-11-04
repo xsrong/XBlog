@@ -37,7 +37,9 @@ gem "redcarpet"
 gem 'coderay'
 gem 'nokogiri'
 
+gem 'font-awesome-sass'
 gem 'font-awesome-rails'
+gem 'md_simple_editor'
 
 # Permission
 gem "cancancan"

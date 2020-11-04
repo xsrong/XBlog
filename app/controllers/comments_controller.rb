@@ -6,6 +6,9 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     respond_to do |format|
       if @comment.save
+        @post.last_comment_id = @comment.id
+        @post.last_comment_user_id = @comment.user_id
+        @post.save
         @comments = @post.comments
         format.js
       else

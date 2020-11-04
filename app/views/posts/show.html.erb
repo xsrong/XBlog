@@ -7,7 +7,7 @@
         <%= link_to(@post.node.name, @post.node)%> | 
         <span><%= @post.title %></span>
         <div class="post-timestamp">
-          <%= link_to(@author.nickname, @author) %>
+          <%= link_to(@author.nickname, @author) %> | 
           <span><%= display_newest_timestamp(@post) %></span>
         </div>
       </div>
@@ -18,8 +18,8 @@
 
       <% if current_user_has_ud_permission_to?(@author) %>
         <div class="action-buttons">
-          <%= button_to("Edit", edit_post_path(@post), method: :get, class: "btn btn-primary") %>
-          <%= button_to("Destroy", @post, method: :delete, class: "btn btn-danger") %>
+          <%= link_to(fa_icon("edit", title: "Edit", class: "fa-3x"), edit_post_path(@post)) %>
+          <%= link_to(fa_icon("trash", title: "Delete", class: "fa-3x"), @post, method: :delete, data: { confirm: "You sure?" }) %>
         </div>
       <% end %>
 
@@ -42,23 +42,12 @@
         <% end %>
 
         <div class="field comment-new-noti">
-          <%= form.label :new_comment %>
+          <%= form.label :new_comment, style: "padding-bottom: 15px;" %>
 
           <div class="editor-toolbar clearfix">
-            <div class="toolbar-buttons">
-            <div class="dropdown" id="dropdown-insert-codes">
-              <a href="#" class="dropdown-toggle-split" data-toggle="dropdown">
-                <%= fa_icon "code", style: "font-size:24px; font-weight:bold;" %>
-              </a>
-
-              <ul class="dropdown-menu">
-                <li><%= link_to("Ruby", "#", remote: true, onclick: "insertCode('ruby')") %></li>
-                <li><%= link_to("Java", "#", remote: true, onclick: "insertCode('java')") %></li>
-              </ul>
-            </div>
-            </div>
+            <%= render 'layouts/tool_bar' %>
           </div>
-          <%= form.text_area :content, autocomplete: "off", class: "comment-content-input", rows: 4, oninput: "textAreaHeightFix(this)" %>
+          <%= form.text_area :content, autocomplete: "off", class: "comment-content-input", rows: 4, onfocus: "deleteSelectedArea()", oninput: "textAreaHeightFix(this)", onblur: "getSelectionArea(this)" %>
         </div>
 
         <div class="actions comment-submit">
@@ -72,21 +61,3 @@
     <%= link_to(@author.nickname, @author) %>
   </div>
 </div>
-
-<script>
-function insertCode(lang){
-  var obj = $(".comment-content-input");
-  var str = obj.val();
-  obj.val(str + "\n\n```" + lang + "\n\n```");
-  obj.trigger("oninput")
-}
-
-function textAreaHeightFix(obj){
-  var lineCount = obj.value.split(/\r?\n/).length;
-  if (lineCount >= 4) {
-    obj.rows = lineCount + 1
-  } else {
-    obj.rows = 4
-  }
-}
-</script>

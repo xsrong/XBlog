@@ -1,1 +1,1 @@
-$(".post-comments").html("<%= escape_javascript(render('posts/comments', {comments: @comments})) %>");
+$(".post-comments").html("<%= escape_javascript(render('posts/comments', {comments: @comments, post_id: @post.id})) %>");

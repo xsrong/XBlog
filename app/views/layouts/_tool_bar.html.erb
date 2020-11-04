@@ -1,0 +1,117 @@
+<div class="toolbar-buttons">
+  <div class="editor-tool at-icon" onclick="mention()">
+    <%= fa_icon("at", title: "mention", class: "fa-2x") %>
+  </div>
+
+  <div class="dropdown code-icon" id="dropdown-insert-codes">
+    <a href="#" class="dropdown-toggle-split" data-toggle="dropdown">
+      <%= fa_icon("code", title: "insert code block", class: "fa-2x") %>
+    </a>
+
+    <ul class="dropdown-menu">
+      <li class="code-chooser" onclick="insertCode('ruby')">Ruby</li>
+      <li class="code-chooser" onclick="insertCode('java')">Java</li>
+      <li class="code-chooser" onclick="insertCode('go')">Go</li>
+    </ul>
+  </div>
+
+  <div class="quote-icon editor-tool" onclick="quote()">
+    <%= fa_icon("quote-right", title: "mention", class: "fa-2x") %>
+  </div>
+
+  <div class="hyperlink-icon editor-tool">
+    <%= fa_icon("link", title: "insert a hyper link", class: "fa-2x", id: "hyperlink-icon", onclick: "showHyperlinkEditor()") %>
+    <div class="hyperlink-editor" style="display: none;">
+      <%= text_field_tag("description", nil, class: "hyperlink-description", id: "hyperlink-description", placeholder: "link description", autocomplete: "off") %>
+      <%= text_field_tag("address", nil, class: "hyperlink-address", id: "hyperlink-address", placeholder: "link address", autocomplete: "off") %>
+      <div class="editor-tool btn btn-sm btn-primary" onclick="createHyperlink()">
+        create
+      </div>
+    </div>
+  </div>
+
+  <div class="preview-area">
+  </div>
+</div>
+
+
+
+<script>
+
+$(document).click(function(e) {
+  var obj = $(".hyperlink-editor");
+  if (e.target.id != "hyperlink-icon" && e.target.id != "hyperlink-address" && e.target.id != "hyperlink-description" && obj.hasClass("show")) {
+    hideHyperlinkEditor();
+  }
+})
+
+var selectedArea = new Array();
+
+function mention() {
+   var obj = $(".comment-content-input");
+  insertMark("@", obj);
+}
+
+function insertCode(lang){
+  var obj = $(".comment-content-input");
+  var text = "\n\n```" + lang + "\n" + obj.val().substring(selectedArea[0], selectedArea[1]) + "\n```\n";
+  insertMark(text, obj);
+}
+
+function quote() {
+  var obj = $(".comment-content-input");
+  var text = ">" + obj.val().substring(selectedArea[0], selectedArea[1]);
+  insertMark(text, obj);
+}
+
+function showHyperlinkEditor(){
+  $(".hyperlink-editor").show();
+  $(".hyperlink-editor").addClass("show"); //sad
+  var obj = $(".comment-content-input");
+  if (selectedArea.length != 0) {
+    t = obj.val().substring(selectedArea[0], selectedArea[1]);
+    $(".hyperlink-description").val(t);
+  }
+}
+
+function hideHyperlinkEditor() {
+  $(".hyperlink-address").val("")
+   $(".hyperlink-editor").removeClass("show")
+  $(".hyperlink-editor").hide()
+} 
+
+function createHyperlink() {
+  var desc = $(".hyperlink-description").val();
+  var addr = $(".hyperlink-address").val();
+  var obj = $(".comment-content-input");
+  var text = "[" + desc + "]" + "(" + addr + ")"
+  hideHyperlinkEditor()
+  insertMark(text, obj)
+}
+
+function insertMark(text, obj) {
+  if (selectedArea.length != 0) {
+    var t = obj.val().substring(0, selectedArea[0]) + text + obj.val().substring(selectedArea[1]);
+    obj.val(t);
+  }
+  obj.trigger("oninput");
+}
+
+function getSelectionArea(obj) {
+  selectedArea = [obj.selectionStart, obj.selectionEnd];
+}
+
+function textAreaHeightFix(obj){
+  var lineCount = obj.value.split(/\r?\n/).length;
+  if (lineCount >= 4) {
+    obj.rows = lineCount + 1;
+  } else {
+    obj.rows = 4;
+  }
+}
+
+function deleteSelectedArea() {
+  selectedArea = [];
+}
+
+</script>
