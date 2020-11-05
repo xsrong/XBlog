@@ -1,11 +1,9 @@
 <div class="toolbar-buttons">
-  <div class="editor-tool at-icon" onclick="mention()">
-    <%= fa_icon("at", title: "mention", class: "fa-2x") %>
-  </div>
+  <%= button_tag(fa_icon("at", title: "mention", class: "fa-2x"), class: "editor-tool at-icon", onclick:"mention()", remote: true, type: "button" ) %>
 
   <div class="dropdown code-icon" id="dropdown-insert-codes">
-    <a href="#" class="dropdown-toggle-split" data-toggle="dropdown">
-      <%= fa_icon("code", title: "insert code block", class: "fa-2x") %>
+    <a href="#" class="dropdown-toggle-split" data-toggle="dropdown" style="padding: 0px;">
+      <%= fa_icon("code", title: "insert code block", class: "fa-2x", style: "color: #333;") %>
     </a>
 
     <ul class="dropdown-menu">
@@ -15,23 +13,21 @@
     </ul>
   </div>
 
-  <div class="quote-icon editor-tool" onclick="quote()">
-    <%= fa_icon("quote-right", title: "mention", class: "fa-2x") %>
+  <%= button_tag(fa_icon("quote-right", title: "quote", class: "fa-2x"), class: "editor-tool at-icon", onclick:"quote()", remote: true, type: "button") %>
+
+  <%= button_tag(fa_icon("link", title: "insert a hyper link", class: "fa-2x", id: "hyperlink-icon"), class:"editor-tool hyperlink-icon", id: "hyperlink-icon", onclick: "showHyperlinkEditor()", remote: true, type: "button") %>
+  <div class="hyperlink-editor" style="display: none;">
+    <%= form_tag() %>
+    <%= text_field_tag("description", nil, class: "hyperlink-description", id: "hyperlink-description", placeholder: "link description", autocomplete: "off") %>
+    <%= text_field_tag("address", nil, class: "hyperlink-address", id: "hyperlink-address", placeholder: "link address", autocomplete: "off") %>
+    <%= button_tag("insert", class: "btn btn-sm btn-primary", onclick: "createHyperlink()", remote: true, type: "button") %>   
   </div>
 
-  <div class="hyperlink-icon editor-tool">
-    <%= fa_icon("link", title: "insert a hyper link", class: "fa-2x", id: "hyperlink-icon", onclick: "showHyperlinkEditor()") %>
-    <div class="hyperlink-editor" style="display: none;">
-      <%= text_field_tag("description", nil, class: "hyperlink-description", id: "hyperlink-description", placeholder: "link description", autocomplete: "off") %>
-      <%= text_field_tag("address", nil, class: "hyperlink-address", id: "hyperlink-address", placeholder: "link address", autocomplete: "off") %>
-      <div class="editor-tool btn btn-sm btn-primary" onclick="createHyperlink()">
-        create
-      </div>
-    </div>
-  </div>
+  <%= button_tag(fa_icon("eye", title: "preview", class: "fa-2x"), class: "editor-tool show-preview-icon", onclick: "requestPreview()", remote: true, type: "button") %>
+  <%= button_tag(fa_icon("eye-slash", title: "preview", class: "fa-2x"), class: "editor-tool hide-preview-icon hide", onclick: "hidePreviewArea()", remote: true, type: "button") %>
+</div>
 
-  <div class="preview-area">
-  </div>
+<div class="preview-area hide" style="border-top: 2px solid hsla(0,0%,89.8%,.4); min-height: 72px;">
 </div>
 
 
@@ -43,7 +39,40 @@ $(document).click(function(e) {
   if (e.target.id != "hyperlink-icon" && e.target.id != "hyperlink-address" && e.target.id != "hyperlink-description" && obj.hasClass("show")) {
     hideHyperlinkEditor();
   }
+});
+
+$(".hyperlink-editor").keydown(function(e){
+  if (e.keyCode == 13) {
+    createHyperlink();
+  }
 })
+
+function requestPreview() {
+  var source = $(".comment-content-input").val();
+  var result;
+  $.post("/ajax/posts/preview",
+    {
+      "source": source,
+    },
+    function(res) {
+      result = res.body;
+      showPreviewArea();
+      $(".preview-area").html(result);
+    }
+  );
+}
+
+function showPreviewArea(){
+  $(".preview-area").removeClass("hide")
+  $(".show-preview-icon").addClass("hide")
+  $(".hide-preview-icon").removeClass("hide")
+}
+
+function hidePreviewArea() {
+  $(".preview-area").addClass("hide")
+  $(".hide-preview-icon").addClass("hide")
+  $(".show-preview-icon").removeClass("hide")
+}
 
 var selectedArea = new Array();
 
@@ -66,7 +95,7 @@ function quote() {
 
 function showHyperlinkEditor(){
   $(".hyperlink-editor").show();
-  $(".hyperlink-editor").addClass("show"); //sad
+  $(".hyperlink-editor").addClass("show"); 
   var obj = $(".comment-content-input");
   if (selectedArea.length != 0) {
     t = obj.val().substring(selectedArea[0], selectedArea[1]);
@@ -75,18 +104,18 @@ function showHyperlinkEditor(){
 }
 
 function hideHyperlinkEditor() {
-  $(".hyperlink-address").val("")
-   $(".hyperlink-editor").removeClass("show")
-  $(".hyperlink-editor").hide()
+  $(".hyperlink-address").val("");
+   $(".hyperlink-editor").removeClass("show");
+  $(".hyperlink-editor").hide();
 } 
 
 function createHyperlink() {
   var desc = $(".hyperlink-description").val();
   var addr = $(".hyperlink-address").val();
   var obj = $(".comment-content-input");
-  var text = "[" + desc + "]" + "(" + addr + ")"
-  hideHyperlinkEditor()
-  insertMark(text, obj)
+  var text = "[" + desc + "]" + "(" + addr + ")";
+  hideHyperlinkEditor();
+  insertMark(text, obj);
 }
 
 function insertMark(text, obj) {
@@ -95,6 +124,8 @@ function insertMark(text, obj) {
     obj.val(t);
   }
   obj.trigger("oninput");
+  obj.focus();
+  obj.trigger("click");
 }
 
 function getSelectionArea(obj) {

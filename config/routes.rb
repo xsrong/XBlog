@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   
   get "users/:id", to: "users#info", as: :user
   get "users/:id/comments", to: "users#comments_list", as: :user_comments
+  get "ajax/users/search", to: "users#search"
+  post "ajax/posts/preview", to: "posts#preview"
 
   root "home#index"
 

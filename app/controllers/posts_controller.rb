@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :preview]
   before_action :set_post, only: [:show, :edit, :update, :destroy, :check_permission]
   before_action :check_permission, only: [:edit, :update, :destroy]
 
@@ -39,6 +39,13 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     redirect_to @user, notice: "post deleted successfully!!"
+  end
+
+  def preview
+    @source = params["source"]
+    respond_to do |format|
+      format.json
+    end
   end
 
   private

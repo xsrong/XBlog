@@ -36,10 +36,14 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem "redcarpet"
 gem 'coderay'
 gem 'nokogiri'
+gem 'md_simple_editor'
 
+# iconfont
 gem 'font-awesome-sass'
 gem 'font-awesome-rails'
-gem 'md_simple_editor'
+
+# @ function
+gem 'jquery-atwho-rails'
 
 # Permission
 gem "cancancan"

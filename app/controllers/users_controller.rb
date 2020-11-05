@@ -16,6 +16,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    @nicknames = User.where("nickname like ? ", "%#{params[:q]}%").limit(8).map { |user| user.nickname }
+    render 'json': @nicknames
+  end
+
   protected
 
   def set_user

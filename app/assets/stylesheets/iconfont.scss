@@ -6,20 +6,23 @@
 }
 
 .fa:hover {
-  background-color: aliceblue;
+  background-color: hsla(0,0%,89.8%,.4);
 }
 
 .code-chooser {
-  margin: 15px;
+  padding: 10px;
+  line-height: 10px;
   cursor: pointer;
 }
 
 .code-chooser:hover {
-  background-color: aliceblue;
+  background-color: hsla(0,0%,89.8%,.4);
 }
 
 .editor-tool {
   cursor: pointer;
+  background: none;
+  border: none;
 }
 
 .hyperlink-editor {

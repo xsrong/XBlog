@@ -107,6 +107,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.1)
       activesupport (>= 5.0.0)
+    jquery-atwho-rails (1.5.4)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -243,6 +244,7 @@ DEPENDENCIES
   font-awesome-rails
   font-awesome-sass
   jbuilder (~> 2.7)
+  jquery-atwho-rails
   jquery-rails
   md_simple_editor
   nokogiri

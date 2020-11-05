@@ -28,6 +28,7 @@
       </div>
     </div>
 
+    <% if user_signed_in? %>
     <div class="comments-new">
       <%= form_with(model: comment=Comment.new, url: post_comments_path(@post), remote: true) do |form| %>
         <% if comment.errors.any? %>
@@ -51,13 +52,46 @@
         </div>
 
         <div class="actions comment-submit">
-          <%= form.submit("Commment", class: "btn btn-primary") %>
+          <%= form.button("Commment", class: "btn btn-primary", onclick: "beforeCommentAction()") %>
         </div>
       <% end %>
     </div>
+    <% end %>
   </div>
 
   <div class="container user-detail col-lg-3">
     <%= link_to(@author.nickname, @author) %>
   </div>
 </div>
+
+<script>
+$('.comment-content-input').atwho(
+  {
+    at: "@", 
+    insertTpl: "@${name}",
+    searchKey: "name",
+    limit: 8,
+    callbacks: {
+      filter(query, data, searchKey) {
+        return data;
+      },
+      sorter(query, items, searchKey) {
+        return items;
+      },
+      remoteFilter(query, callback) {
+        return $.getJSON(
+          '/ajax/users/search',
+          { q: query },
+          function(data) {
+            return callback(data);
+          }
+        );
+      }
+    }
+  });
+
+  function beforeCommentAction() {
+    hidePreviewArea();
+    $(".preview-area").html("");
+  }
+</script>

@@ -30,7 +30,7 @@
   padding-bottom: 15px;
 }
 
-.comment-content p {
+.comment-content p, .preview-area p {
   font-size: 18px;
   line-height: 30px;
 }
@@ -70,4 +70,8 @@
 
 .toolbar-buttons {
   display: flex;
+}
+
+.preview-area {
+  margin-top: 15px;
 }
