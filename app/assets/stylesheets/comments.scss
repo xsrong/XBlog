@@ -7,7 +7,6 @@
 }
 
 .comment-user {
-  margin: 15px;
   font-size: 20px;
   font-weight: bold;
   display: inline-flex;
@@ -21,13 +20,13 @@
 .comment-timestamp {
   font-size: 15px;
   color: gray;
-  display: inline-flex;
 }
 
 .comment-content {
-  margin-left: 30px;
-  margin-right: 30px;
-  padding-bottom: 15px;
+  margin: 15px 30px 0px 30px;
+  // margin-left: 30px;
+  // margin-right: 30px;
+  // padding-bottom: 15px;
 }
 
 .comment-content p, .preview-area p {
@@ -57,9 +56,12 @@
 
 .comment-action {
   display: none;
-  margin-top: 20px;
   float: right;
-  margin-right: 200px;
+  margin-top: -10px;
+}
+
+.post-comment {
+  padding: 35px;
 }
 
 .post-comment:hover {
@@ -75,3 +77,5 @@
 .preview-area {
   margin-top: 15px;
 }
+
+

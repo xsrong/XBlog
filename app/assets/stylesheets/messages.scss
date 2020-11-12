@@ -1,0 +1,29 @@
+// Place all the styles related to the messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.message-sent, .message-received {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.message-sent {
+  margin-left: 50%;
+}
+
+.message-received {
+  margin-right: 50%;
+}
+
+
+.message-sent-user-nickname, .message-sent-timestamp, .message-received-user-nickname, .message-received-timestamp {
+  color: gray
+}
+
+.message-sent-content {
+  background-color: aliceblue;
+}
+
+.message-sent-text, .message-received-text {
+  margin: 15px;
+}

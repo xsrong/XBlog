@@ -12,7 +12,7 @@
 
   <div class="field">
     <%= form.label :node %>
-    <%= form.select :node_id, @nodes.collect{ |node| [node.name, node.id] } %>
+    <%= form.select :node_id, nodes.collect{ |node| [node.name, node.id] } %>
   </div>
 
   <div class="field">

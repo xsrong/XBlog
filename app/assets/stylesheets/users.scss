@@ -18,6 +18,13 @@
   margin-bottom: 20px;
   font-size: 40px;
   font-weight: bold;
+  display: inline-block;
+}
+
+.message-icon {
+  margin-left: 20px;
+  display: inline;
+  color: #333;
 }
 
 .user-email, .user-created-at, .user-signature {
@@ -41,7 +48,6 @@
 }
 
 .no-data-tag {
-  background: rgba(229, 229, 229, 0.4);
   font-size: 25px;
   font-weight: bold;
   margin-left: -15px;

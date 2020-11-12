@@ -1,0 +1,1 @@
+$("#<%= @btn %>").html("<%= escape_javascript(render(partial: 'likes/show', locals: { data: @data, liked_by: @liked_by, size: @size })) %>");

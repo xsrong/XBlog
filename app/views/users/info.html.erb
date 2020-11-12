@@ -1,10 +1,17 @@
 <% provide(:title, @user.nickname) %>
 
 <div class="container user-info">
-  <div class="user-detail col-md-4">
+  <div class="card user-detail col-md-4">
+    <div class="card-body">
     <div class="user-nickname">
       <%= "@" + @user.nickname %>
     </div>
+
+    <% unless current_user.id == @user.id %>
+      <div class="message-icon">
+        <%= link_to(fa_icon("comment-dots", class: "fa-3x", title: "send message"), new_message_path(@user.nickname), method: :get, alt: "message_icon") %>
+      </div>
+    <% end %>
 
     <div class="user-created-at">
       <%= "Created " + time_ago_in_words(@user.created_at) + " ago." %>
@@ -19,18 +26,25 @@
     </div>
 
     <div class="user-posts-comments-count">
-      <%= @user.posts.count %> Posts /
-      <%= @user.comments.count %> Comments
+      <%= @posts.count %> Posts /
+      <%= @user.comments.count %> Comments /
+      <%= @user.received_likes_count %> likes received
     </div>
+  </div>
   </div>
 
   <div class="col-md-8">
     <div class="user-info-menu nav nav-tabs">
-      <li class="nav-item"><%= link_to("Posts", user_path(@user), remote: true) %></li>
-      <li class="nav-item"><%= link_to("Comments", user_comments_path(@user), remote: true) %></li>
+      <li class="nav-item"><%= link_to("Posts", user_path(@user.nickname), remote: true) %></li>
+      <li class="nav-item"><%= link_to("Comments", user_comments_path(@user.nickname), remote: true) %></li>
+      <li class="nav-item">
+        <% if current_user?(@user.id)%>
+          <%= link_to("Notifications", user_notifications_path(@user.nickname), remote: true) %>
+        <% end %>
+      </li>
     </div>
 
-    <div class="user-selected-info">
+    <div class="card user-selected-info">
       <div class="row row-cols-1 user-info-datas">
         <%= render "users/selected_datas", { datas: @posts, user: @user } %>
       </div>

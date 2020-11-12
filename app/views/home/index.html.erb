@@ -13,7 +13,7 @@
 
   <div class="row row-cols-2">
    <% @posts.each_with_index do |node_posts, i| %>
-    <section class="col-md-6" id="home-node">
+    <section class="card col-md-6" id="home-node">
       <div id="home-node-name"><%= link_to(@nodes[i].name, @nodes[i]) %></div>
       <% node_posts.each do |post| %>
         <div class="home-post" onclick="javascrtpt:window.location.href='posts/<%= post.id %>';">
@@ -28,6 +28,7 @@
           </div>
         </div>
         <div class="timestamp-md">
+          <%= link_to(post.user_nickname, "/users/#{post.user_nickname}") %> | 
           <span><%= display_newest_timestamp(post) %></span>
         </div>
         <br />

@@ -1,6 +1,6 @@
 <% provide(:title, "Edit Comment") %>
 
-<%= form_with(model: @comment, url: post_comment_path(@post, @comment), local: true) do |form| %>
+<%= form_with(model: @comment, url: post_comment_path(@post, @comment), method: :patch) do |form| %>
   <% if @comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this user from being saved:</h2>

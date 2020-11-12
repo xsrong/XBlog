@@ -1,23 +1,30 @@
-<% unless datas.size.zero? %>
-<div class="data-detail" id="data-detail">
-<% datas.each do |data| %>
-  <div class="home-post" onclick="javascrtpt:window.location.href='<%= '/posts/' + data.post_id.to_s %>';">
-    <div class="post-list-title">
-      <%= link_to(data.title, data.post) %>
-      <% if new_post?(data) %>
-        <div class="new-post-tag">new</div>
+
+<% unless datas.count.zero? %>
+  <div class="data-detail" id="data-detail">
+    <% datas.each do |data| %>
+      <% if data.is_a? Notification %>
+        <div class="home-nitofication">
+          <%= data.content.html_safe %>
+        </div>
+      <% else %>
+        <div class="home-post" onclick="javascrtpt:window.location.href='<%= '/posts/' + data.post_id.to_s %>';">
+          <div class="post-list-title">
+            <%= link_to(data.title, data.post) %>
+            <% if new_post?(data) %>
+              <div class="new-post-tag">new</div>
+            <% end %>
+          </div>
+          <div style="margin: 15px 40px 15px 0px;">
+            <%= display_limited_content(data, 100) %>
+          </div>
+        </div>
+        <div class="timestamp-md">
+          <span><%= display_newest_timestamp(data) %></span>
+        </div>
       <% end %>
-    </div>
-    <div style="margin: 15px 40px 15px 0px;">
-      <%= display_limited_content(data, 100) %>
-    </div>
+      <br />
+    <% end %>
   </div>
-  <div class="timestamp-md">
-    <span><%= display_newest_timestamp(data) %></span>
-  </div>
-  <br />
-<% end %>
-</div>
 <% else %>
   <div class="no-data-tag">No data</div>
 <% end %>

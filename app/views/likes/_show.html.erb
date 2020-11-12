@@ -1,0 +1,8 @@
+<% unless data.liked_by.include?(current_user&.id) %>
+  <%= link_to(far_icon("heart", title: "Like", class: "#{size} like-button"), new_like_path(data.class.to_s.underscore, data.id) + "?f=#{data.class.to_s.underscore}-#{data.id}", remote: true, method: :post) %>
+<% else %>
+  <%= link_to(fa_icon("heart", title: "Like", class: "#{size} unlike-button", id: "#{data.class.to_s.underscore}-#{data.id}"), destroy_like_path(data.class.to_s.underscore, data.id)+"?f=#{data.class.to_s.underscore}-#{data.id}", remote: true, method: :delete)%>
+<% end %>
+<div class="like-count">
+  <%= data.likes.count %>
+</div>

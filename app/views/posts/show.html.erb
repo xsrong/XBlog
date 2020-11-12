@@ -3,11 +3,12 @@
 <div>
   <div class="container col-lg-9">
     <div class="post-detail">
+      <div class="card">
       <div class="post-info">
-        <%= link_to(@post.node.name, @post.node)%> | 
+        <%= link_to(@node.name, @node)%> | 
         <span><%= @post.title %></span>
         <div class="post-timestamp">
-          <%= link_to(@author.nickname, @author) %> | 
+          <%= link_to(@author.nickname, "/users/#{@author.nickname}") %> | 
           <span><%= display_newest_timestamp(@post) %></span>
         </div>
       </div>
@@ -16,12 +17,16 @@
         <%= raw markdown(@post.content) %>
       </div>
 
-      <% if current_user_has_ud_permission_to?(@author) %>
-        <div class="action-buttons">
+      <div class="action-buttons">
+        <% if current_user_has_ud_permission_to?(@author.id) %>        
           <%= link_to(fa_icon("edit", title: "Edit", class: "fa-3x"), edit_post_path(@post)) %>
           <%= link_to(fa_icon("trash", title: "Delete", class: "fa-3x"), @post, method: :delete, data: { confirm: "You sure?" }) %>
+        <% end %>
+        <div class="like-info" id=<%= "post-#{@post.id}" %>>
+          <%= render(partial: 'likes/show', locals: { data: @post, liked_by: @liked_by, size: "fa-3x" }) %>
         </div>
-      <% end %>
+      </div>
+      </div>
 
       <div class="post-comments">
         <%= render("comments", { comments: @comments, post_id: @post.id }) %>
@@ -29,7 +34,7 @@
     </div>
 
     <% if user_signed_in? %>
-    <div class="comments-new">
+    <div class="card comments-new">
       <%= form_with(model: comment=Comment.new, url: post_comments_path(@post), remote: true) do |form| %>
         <% if comment.errors.any? %>
           <div id="error_explanation">
@@ -59,8 +64,8 @@
     <% end %>
   </div>
 
-  <div class="container user-detail col-lg-3">
-    <%= link_to(@author.nickname, @author) %>
+  <div class="container card user-detail col-lg-3">
+    <%= link_to(@author.nickname, "/users/#{@author.nickname}") %>
   </div>
 </div>
 

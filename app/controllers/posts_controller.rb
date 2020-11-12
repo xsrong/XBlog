@@ -11,6 +11,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @post.user_nickname = current_user.nickname
     if @post.save
       redirect_to @post
     else
@@ -22,6 +23,7 @@ class PostsController < ApplicationController
     @author = User.find(@post.user_id)
     @node = Node.find(@post.node_id)
     @comments = @post.comments
+    @liked_by = @post.liked_by
   end
 
   def edit
@@ -59,7 +61,7 @@ class PostsController < ApplicationController
 
     def check_permission
       @user = @post.user
-      unless current_user_has_ud_permission_to?(@user)
+      unless current_user_has_ud_permission_to?(@user.id)
         redirect_to root_path, alert: "invalid action!"
       end
     end

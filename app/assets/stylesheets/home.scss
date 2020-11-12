@@ -18,19 +18,17 @@
 }
 
 #home-node {
-  background: white;
+  border: none;
   border-right: 50px solid hsla(0,0%,89.8%,.4);
   border-bottom: 50px solid hsla(0,0%,89.8%,.4);
-  // float: none;
 }
 
 #home-node-name{
-  margin-bottom: 20px;
-  margin-top: 20px;
-  font-size: 20px;
+  margin: 40px 40px 40px 20px;
+  font-size: 40px;
 }
 
-.home-post {
+.home-post, .home-nitofication {
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 20px;
@@ -42,8 +40,8 @@
 }
 
 .post-list-title {
-  margin-right: 50px;
   font-size: 18px;
+  display: inline;
 }
 
 .timestamp-md {
@@ -53,5 +51,17 @@
 .new-post-tag {
   font-size: 10px;
   color: blue;
-  float: right;
+  display: inline;
+}
+.new-noti-tag {
+  // width: 16px;
+  // height: 16px;
+  // background-color: red;
+  font-size: 10px;
+  color: red;
+  display: block;
+  // border-radius: 8px;
+  margin-top: -40px;
+  margin-left: 140px;
+  position: absolute;
 }

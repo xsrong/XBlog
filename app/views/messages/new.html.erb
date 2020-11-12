@@ -1,0 +1,27 @@
+<%= provide(:title, "Messages with #{@to_user.nickname}") %>
+
+<div class="message-list">
+  <%= render 'messages/list', { message_list: @message_list } %>
+</div>
+
+<%= form_with(model: @message, remote: true, class: "new-message-form") do |form| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @message.errors.full_messages.each do |m| %>
+          <li><%= m %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :new_message %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit("Send", class: "btn btn-md btn-primary") %>
+  </div>
+<% end %>
